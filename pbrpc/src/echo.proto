@@ -1,0 +1,46 @@
+package example;
+
+option java_package = "com.example.test";
+option cc_generic_services = true;
+option java_generic_services = true;
+option java_outer_classname="EchoServiceBean";
+
+message Student
+{
+    required string id = 1;
+    required string name = 2;
+    required string gender = 3;
+    required int32  age = 4;
+    required string object = 5;
+    required string home_address = 6;
+    required string phone = 7;
+}
+
+message Person {
+	enum Type {
+		MAN = 0;
+		WOMAN = 1;
+	}
+	required Type type = 1;
+	required uint32 id = 2;
+	optional string name = 3;
+	optional fixed32 number = 4;
+}
+
+message EchoRequest {
+	required string msg = 1;
+	repeated Person persons = 2;
+}
+
+message EchoResponse {
+	required string res = 1;
+}
+
+service EchoService {
+	rpc Echo(EchoRequest) returns (EchoResponse);
+
+    rpc Reflect(EchoRequest) returns (Student);
+
+	rpc Test(EchoRequest) returns (Student);
+}
+
